@@ -46,10 +46,14 @@ stages:
     steps:
     - task: DownloadBuildArtifacts@0
       inputs:
-        buildType: 'current'
+        buildType: 'specific'
+        project: '9df47b7d-9963-412b-ac0a-382f4553d4a4'
+        pipeline: '1'
+        specificBuildWithTriggering: true
+        buildVersionToDownload: 'latest'
         downloadType: 'single'
         artifactName: 'drop'
-        downloadPath: '$(Build.ArtifactStagingDirectory)'
+        downloadPath: '$(System.ArtifactsDirectory)'
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'

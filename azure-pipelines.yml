@@ -33,7 +33,7 @@ stages:
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
+        ArtifactName: 'employeeartifact'
         publishLocation: 'Container'
 
 - stage: Deploy
@@ -46,14 +46,11 @@ stages:
     steps:
     - task: DownloadBuildArtifacts@0
       inputs:
-        buildType: 'specific'
-        project: '9df47b7d-9963-412b-ac0a-382f4553d4a4'
-        pipeline: '1'
-        specificBuildWithTriggering: true
-        buildVersionToDownload: 'latest'
+        buildType: 'current'
         downloadType: 'single'
-        artifactName: 'drop'
+        artifactName: 'EmployeeArtifact'
         downloadPath: '$(System.ArtifactsDirectory)'
+        
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'

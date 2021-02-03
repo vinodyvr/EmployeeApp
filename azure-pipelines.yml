@@ -49,15 +49,16 @@ stages:
         buildType: 'current'
         downloadType: 'single'
         artifactName: 'EmployeeArtifact'
-        downloadPath: '$(Build.ArtifactStagingDirectory)'
-        
+        downloadPath: '$(System.ArtifactsDirectory)'
+    
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+        azureSubscription: 'Free Trial(1)(8a637732-23bb-4eac-8053-74de19434aab)'
         appType: 'webApp'
         WebAppName: 'employeesc'
         deployToSlotOrASE: true
         ResourceGroupName: 'DotnetMVCWebApp'
         SlotName: 'production'
         packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    

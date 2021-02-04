@@ -39,5 +39,6 @@ steps:
     azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
     appType: 'webApp'
     WebAppName: 'employeecrud'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
+    ResourceGroupName: 'DotnetMVCWebApp'
+    deployToSlotOrASE: true
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/*.zip'

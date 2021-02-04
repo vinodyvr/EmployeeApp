@@ -33,3 +33,11 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+    appType: 'webApp'
+    WebAppName: 'employeecrud'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+

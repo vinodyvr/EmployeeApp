@@ -51,13 +51,12 @@ stages:
         artifactName: 'EmployeeArtifact'
         downloadPath: '$(System.ArtifactsDirectory)'
     
-    - task: AzureRmWebAppDeployment@4
+    - task: AzureWebApp@1
       inputs:
-        ConnectionType: 'AzureRM'
         azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
         appType: 'webApp'
-        WebAppName: 'employeecrud'
-        ResourceGroupName: 'DotnetMVCWebApp'
-        deployToSlotOrASE: true
-        packageForLinux: '$(System.ArtifactsDirectory)/*.zip'
+        appName: 'employeecrud'
+        package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        deploymentMethod: 'auto'
+    
     

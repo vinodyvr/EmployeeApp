@@ -60,6 +60,6 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'DotnetMVCWebApp'
         SlotName: 'production'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
     
     

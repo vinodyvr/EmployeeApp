@@ -3,9 +3,6 @@
     ViewData["Title"] = "Employee Details";
 }
 <h1>Employee Details</h1>
-<p>
-    <a asp-action="Index" >Back to List</a>
-</p>
 <div class="row">
     <dl class="row">
         <dt class="col-sm-2">@Html.DisplayNameFor(model => model.EmpId)</dt>
@@ -23,5 +20,8 @@
         <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Salary)</dt>
         <dd class="col-sm-10">@Html.DisplayFor(model => model.Salary)</dd>
     </dl>
-   
+
 </div>
+<p class="p-2">
+    <a asp-action="Index" class="btn btn-info">Back to List</a>
+</p>

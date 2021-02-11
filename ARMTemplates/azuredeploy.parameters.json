@@ -21,13 +21,13 @@
           "value": "#arm_employeesqldbName#" 
       },
       "employeesqldbCollation": {
-          "value": "#employeesqldbCollation#"
+          "value": "#arm_employeesqldbCollation#"
       },
       "employeesqldbEdition": {
-          "value": "#employeesqldbEdition#"
+          "value": "#arm_employeesqldbEdition#"
       },
       "employeesqldbRequestedServiceObjectiveName": {
-          "value": "#employeesqldbRequestedServiceObjectiveName#"
+          "value": "#arm_employeesqldbRequestedServiceObjectiveName#"
       }
   }
 }

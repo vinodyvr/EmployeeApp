@@ -2,23 +2,27 @@
 @{
     ViewData["Title"] = "Employee Details";
 }
+<div class="grad-head">
 <h1>Employee Details</h1>
-<div class="row">
-    <dl class="row">
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.EmpId)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.EmpId)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.EmpName)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.EmpName)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Email)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Email)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Age)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Age)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Salary)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.Salary)</dd>
-    </dl>    
 </div>
-<a asp-action="Index" class="btn btn-info">Back to List</a>
+<div class="row">
+    <div class="col-sm-12">
+    <dl >
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.EmpId)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.EmpId)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.EmpName)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.EmpName)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Email)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Age)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Age)</dd>
+
+        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Salary)</dt>
+        <dd class="col-sm-8">@Html.DisplayFor(model => model.Salary)</dd>
+    </dl> 
+    <a asp-action="Index" class="btn btn-info">Back to List</a>
+    </div>
+</div>

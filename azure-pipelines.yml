@@ -59,6 +59,18 @@ stages:
         downloadType: 'single'
         artifactName: 'EmployeeArtifact'
         downloadPath: '$(System.ArtifactsDirectory)'
+    - task: replacetokens@3
+      inputs:
+        rootDirectory: '$(System.ArtifactsDirectory)'
+        targetFiles: 'azuredeploy.parameters.json'
+        encoding: 'auto'
+        writeBOM: true
+        actionOnMissing: 'warn'
+        keepToken: false
+        tokenPrefix: '#['
+        tokenSuffix: ']#'
+        useLegacyPattern: false
+        enableTelemetry: true
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
@@ -77,9 +89,9 @@ stages:
         ConnectionType: 'AzureRM'
         azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
         appType: 'webApp'
-        WebAppName: 'employeecrud'
+        WebAppName: '$(arm_employeewebappname)'
         deployToSlotOrASE: true
-        ResourceGroupName: 'DotnetMVCWebApp'
+        ResourceGroupName: '$(arm_employeewebappname)'
         SlotName: 'production'
         packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
     

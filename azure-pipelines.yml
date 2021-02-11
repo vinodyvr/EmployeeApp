@@ -51,9 +51,9 @@ stages:
     pool:
       vmImage: 'windows-latest'
     variables:
-      arm_employeewebappname : 'EmpWebApp-Dev'
-      arm_employeewebappskuname : 'EmpWebAppsku-Dev'
-      arm_employeesqlservername : 'EmpWebSql-Dev'
+      employeewebappname : 'EmpWebApp-Dev'
+      employeewebappskuname : 'EmpWebAppsku-Dev'
+      employeesqlservername : 'EmpWebSql-Dev'
     steps:
     - task: DownloadBuildArtifacts@0
       inputs:
@@ -79,7 +79,7 @@ stages:
         azureResourceManagerConnection: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
         subscriptionId: '8a637732-23bb-4eac-8053-74de19434aab'
         action: 'Create Or Update Resource Group'
-        resourceGroupName: '$(arm_employeewebappname)'
+        resourceGroupName: '$(employeewebappname)'
         location: 'South Central US'
         templateLocation: 'Linked artifact'
         csmFile: '$(System.ArtifactsDirectory)/**/azuredeploy.json'
@@ -91,9 +91,9 @@ stages:
         ConnectionType: 'AzureRM'
         azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
         appType: 'webApp'
-        WebAppName: '$(arm_employeewebappname)'
+        WebAppName: '$(employeewebappname)'
         deployToSlotOrASE: true
-        ResourceGroupName: '$(arm_employeewebappname)'
+        ResourceGroupName: '$(employeewebappname)'
         SlotName: 'production'
         packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
     

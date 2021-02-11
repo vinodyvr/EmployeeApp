@@ -50,9 +50,11 @@ stages:
   - job: Deploy
     pool:
       vmImage: 'windows-latest'
-
+    variables:
+      arm_employeewebappname : 'EmpWebApp-Dev'
+      arm_employeewebappskuname : 'EmpWebAppsku-Dev'
+      arm_employeesqlservername : 'EmpWebSql-Dev'
     steps:
-
     - task: DownloadBuildArtifacts@0
       inputs:
         buildType: 'current'

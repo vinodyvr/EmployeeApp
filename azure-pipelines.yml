@@ -30,14 +30,6 @@ stages:
         msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
         platform: '$(buildPlatform)'
         configuration: '$(buildConfiguration)'
-
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: 'ARMTemplates'
-        Contents: 'azuredeploy*.json'
-        TargetFolder: '$(build.artifactStagingDirectory)'
-    
-    
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
@@ -50,10 +42,7 @@ stages:
   - job: Deploy
     pool:
       vmImage: 'windows-latest'
-    variables:
-      employeewebappname : 'EmpWebApp-Dev'
-      employeewebappskuname : 'EmpWebAppsku-Dev'
-      employeesqlservername : 'EmpWebSql-Dev'
+
     steps:
     - task: DownloadBuildArtifacts@0
       inputs:
@@ -61,39 +50,15 @@ stages:
         downloadType: 'single'
         artifactName: 'EmployeeArtifact'
         downloadPath: '$(System.ArtifactsDirectory)'
-    - task: replacetokens@3
-      inputs:
-        rootDirectory: 'employeeartifact'
-        targetFiles: 'azuredeploy.parameters.json'
-        encoding: 'auto'
-        writeBOM: true
-        actionOnMissing: 'warn'
-        keepToken: false
-        tokenPrefix: '#['
-        tokenSuffix: ']#'
-        useLegacyPattern: false
-        enableTelemetry: true
     
-    - task: AzureResourceManagerTemplateDeployment@3
-      inputs:
-        deploymentScope: 'Resource Group'
-        azureResourceManagerConnection: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
-        subscriptionId: '8a637732-23bb-4eac-8053-74de19434aab'
-        action: 'Create Or Update Resource Group'
-        resourceGroupName: '$(employeewebappname)'
-        location: 'Central US'
-        templateLocation: 'Linked artifact'
-        csmFile: '$(System.ArtifactsDirectory)/**/azuredeploy.json'
-        csmParametersFile: '$(System.ArtifactsDirectory)/**/azuredeploy.parameters.json'
-        deploymentMode: 'Incremental'
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
         appType: 'webApp'
-        WebAppName: '$(employeewebappname)'
+        WebAppName: 'employeecrud'
         deployToSlotOrASE: true
-        ResourceGroupName: '$(employeewebappname)'
+        ResourceGroupName: 'DotnetMVCWebApp'
         SlotName: 'production'
         packageForLinux: '$(System.ArtifactsDirectory)/**/*.zip'
     

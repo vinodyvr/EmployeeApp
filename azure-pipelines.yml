@@ -73,6 +73,7 @@ stages:
         tokenSuffix: ']#'
         useLegacyPattern: false
         enableTelemetry: true
+    
     - task: AzureResourceManagerTemplateDeployment@3
       inputs:
         deploymentScope: 'Resource Group'
@@ -80,12 +81,11 @@ stages:
         subscriptionId: '8a637732-23bb-4eac-8053-74de19434aab'
         action: 'Create Or Update Resource Group'
         resourceGroupName: '$(employeewebappname)'
-        location: 'South Central US'
+        location: 'Central US'
         templateLocation: 'Linked artifact'
         csmFile: '$(System.ArtifactsDirectory)/**/azuredeploy.json'
         csmParametersFile: '$(System.ArtifactsDirectory)/**/azuredeploy.parameters.json'
         deploymentMode: 'Incremental'
-    
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'

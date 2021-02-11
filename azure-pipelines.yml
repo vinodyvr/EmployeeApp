@@ -63,7 +63,7 @@ stages:
         downloadPath: '$(System.ArtifactsDirectory)'
     - task: replacetokens@3
       inputs:
-        rootDirectory: '$(System.ArtifactsDirectory)'
+        rootDirectory: 'employeeartifact'
         targetFiles: 'azuredeploy.parameters.json'
         encoding: 'auto'
         writeBOM: true

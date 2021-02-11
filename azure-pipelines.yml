@@ -52,12 +52,25 @@ stages:
       vmImage: 'windows-latest'
 
     steps:
+
     - task: DownloadBuildArtifacts@0
       inputs:
         buildType: 'current'
         downloadType: 'single'
         artifactName: 'EmployeeArtifact'
         downloadPath: '$(System.ArtifactsDirectory)'
+    - task: AzureResourceManagerTemplateDeployment@3
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+        subscriptionId: '8a637732-23bb-4eac-8053-74de19434aab'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: '$(arm_employeewebappname)'
+        location: 'South Central US'
+        templateLocation: 'Linked artifact'
+        csmFile: '$(System.ArtifactsDirectory)/**/azuredeploy.json'
+        csmParametersFile: '$(System.ArtifactsDirectory)/**/azuredeploy.parameters.json'
+        deploymentMode: 'Incremental'
     
     - task: AzureRmWebAppDeployment@4
       inputs:

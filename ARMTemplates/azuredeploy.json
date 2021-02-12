@@ -108,53 +108,6 @@
         "name": "[parameters('employeewebappname')]",
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('employeewebappname'))]"
       }
-    },
-    {
-      "name": "[parameters('employeesqlservername')]",
-      "type": "Microsoft.Sql/servers",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2014-04-01-preview",
-      "dependsOn": [],
-      "tags": {
-        "displayName": "employeesqlserver"
-      },
-      "properties": {
-        "administratorLogin": "[parameters('employeesqlserverAdminLogin')]",
-        "administratorLoginPassword": "[parameters('employeesqlserverAdminLoginPassword')]"
-      },
-      "resources": [
-        {
-          "name": "AllowAllWindowsAzureIps",
-          "type": "firewallrules",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2014-04-01-preview",
-          "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', parameters('employeesqlservername'))]"
-          ],
-          "properties": {
-            "startIpAddress": "0.0.0.0",
-            "endIpAddress": "0.0.0.0"
-          }
-        },
-        {
-          "name": "[parameters('employeesqldbName')]",
-          "type": "databases",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2014-04-01-preview",
-          "dependsOn": [
-            "[resourceId('Microsoft.Sql/servers', parameters('employeesqlservername'))]"
-          ],
-          "tags": {
-            "displayName": "employeesqldb"
-          },
-          "properties": {
-            "collation": "[parameters('employeesqldbCollation')]",
-            "edition": "[parameters('employeesqldbEdition')]",
-            "maxSizeBytes": "1073741824",
-            "requestedServiceObjectiveName": "[parameters('employeesqldbRequestedServiceObjectiveName')]"
-          }
-        }
-      ]
     }
     
     ],

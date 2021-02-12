@@ -7,6 +7,27 @@
       },
       "employeeeebappskuname": {
           "value": "#arm_employeeeebappskuname#"
+      },
+      "employeesqlservername": {
+          "value": "#arm_employeesqlservername#"
+      },
+      "employeesqlserverAdminLogin": {
+          "value": "#arm_employeesqlserverAdminLogin#" 
+      },
+      "employeesqlserverAdminLoginPassword": {
+          "value": "#arm_employeesqlserverAdminLoginPassword#" 
+      },
+      "employeesqldbName": {
+          "value": "#arm_employeesqldbName#" 
+      },
+      "employeesqldbCollation": {
+          "value": "#arm_employeesqldbCollation#"
+      },
+      "employeesqldbEdition": {
+          "value": "#arm_employeesqldbEdition#"
+      },
+      "employeesqldbRequestedServiceObjectiveName": {
+          "value": "#arm_employeesqldbRequestedServiceObjectiveName#"
       }
   }
 }

@@ -32,6 +32,7 @@ namespace EmployeeApp.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            Console.WriteLine("---------Started------");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -55,6 +56,7 @@ namespace EmployeeApp.Web
                     name: "default",
                     pattern: "{controller=Employee}/{action=Index}/{id?}");
             });
+            Console.WriteLine("---------Ended------");
         }
     }
 }

@@ -27,56 +27,52 @@
         "description": "Describes plan's pricing tier and capacity. Check details at https://azure.microsoft.com/en-us/pricing/details/app-service/"
       }
     },
-    "employeeconnectionstring": {
-      "type": "string",
-      "minLength": 1
-    },
     "employeesqlservername": {
       "type": "string",
       "minLength": 1
     },
-    "employeesqlserverAdminLogin": {
-      "type": "string",
-      "minLength": 1
-    },
-    "employeesqlserverAdminLoginPassword": {
-      "type": "securestring"
-    },
-    "employeesqldbName": {
-      "type": "string",
-      "minLength": 1
-    },
-    "employeesqldbCollation": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "SQL_Latin1_General_CP1_CI_AS"
-    },
-    "employeesqldbEdition": {
-      "type": "string",
-      "defaultValue": "Basic",
-      "allowedValues": [
-        "Basic",
-        "Standard",
-        "Premium"
-      ]
-    },
-    "employeesqldbRequestedServiceObjectiveName": {
-      "type": "string",
-      "defaultValue": "Basic",
-      "allowedValues": [
-        "Basic",
-        "S0",
-        "S1",
-        "S2",
-        "P1",
-        "P2",
-        "P3"
-      ],
-      "metadata": {
-        "description": "Describes the performance level for Edition"
+      "employeesqlserverAdminLogin": {
+        "type": "string",
+        "minLength": 1
+      },
+      "employeesqlserverAdminLoginPassword": {
+        "type": "securestring"
+      },
+      "employeesqldbName": {
+        "type": "string",
+        "minLength": 1
+      },
+      "employeesqldbCollation": {
+        "type": "string",
+        "minLength": 1,
+        "defaultValue": "SQL_Latin1_General_CP1_CI_AS"
+      },
+      "employeesqldbEdition": {
+        "type": "string",
+        "defaultValue": "Basic",
+        "allowedValues": [
+          "Basic",
+          "Standard",
+          "Premium"
+        ]
+      },
+      "employeesqldbRequestedServiceObjectiveName": {
+        "type": "string",
+        "defaultValue": "Basic",
+        "allowedValues": [
+          "Basic",
+          "S0",
+          "S1",
+          "S2",
+          "P1",
+          "P2",
+          "P3"
+        ],
+        "metadata": {
+          "description": "Describes the performance level for Edition"
+        }
       }
-    }
-  },
+    },
   "variables": {},
   "resources": [
     {
@@ -124,16 +120,8 @@
             "displayName": "EmployeeAppSettings"
           },
           "properties": {
-            "key1": "[parameters('employeewebappname')]",            
-            "siteConfig": {
-              "connectionStrings": [
-                {
-                  "name": "defaultConnection",
-                  "connectionString": "[parameters('employeeconnectionstring')]",
-                  "type": 2
-                }
-              ]
-            }
+            "key1": "[parameters('employeewebappname')]",
+            "key2": "value2"
           }
         }
       ]

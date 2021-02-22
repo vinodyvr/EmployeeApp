@@ -28,9 +28,6 @@
       },
       "employeesqldbRequestedServiceObjectiveName": {
           "value": "#arm_employeesqldbRequestedServiceObjectiveName#"
-      },
-      "employeeconnectionstring": {
-          "value": "#arm_employeeconnectionstring#" 
       }
   }
 }

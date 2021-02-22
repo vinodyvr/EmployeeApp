@@ -93,40 +93,6 @@
       }
     },
     {
-      "name": "[parameters('employeewebappname')]",
-      "type": "Microsoft.Web/sites",
-      "location": "[resourceGroup().location]",
-      "apiVersion": "2015-08-01",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', parameters('employeewebappname'))]"
-      ],
-      "tags": {
-        "[concat('hidden-related:', resourceId('Microsoft.Web/serverfarms', parameters('EmployeeWebAppName')))]": "Resource",
-        "displayName": "EmployeeWebApp"
-      },
-      "properties": {
-        "name": "[parameters('employeewebappname')]",
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('employeewebappname'))]"
-      },
-      "resources": [
-        {
-          "name": "appsettings",
-          "type": "config",
-          "apiVersion": "2015-08-01",
-          "dependsOn": [
-            "[resourceId('Microsoft.Web/sites', parameters('employeewebappname'))]"
-          ],
-          "tags": {
-            "displayName": "EmployeeAppSettings"
-          },
-          "properties": {
-            "key1": "[parameters('employeewebappname')]",
-            "key2": "value2"
-          }
-        }
-      ]
-    },
-    {
       "name": "[parameters('employeesqlservername')]",
       "type": "Microsoft.Sql/servers",
       "location": "[resourceGroup().location]",
@@ -172,8 +138,50 @@
           }
         }
       ]
+    },
+    {
+      "name": "[parameters('employeewebappname')]",
+      "type": "Microsoft.Web/sites",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-08-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('employeewebappname'))]"
+      ],
+      "tags": {
+        "[concat('hidden-related:', resourceId('Microsoft.Web/serverfarms', parameters('EmployeeWebAppName')))]": "Resource",
+        "displayName": "EmployeeWebApp"
+      },
+      "properties": {
+        "name": "[parameters('employeewebappname')]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('employeewebappname'))]"
+      },
+      "resources": [
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('employeewebappname'))]"
+          ],
+          "tags": {
+            "displayName": "EmployeeAppSettings"
+          },
+          "properties": {
+            "key1": "[parameters('employeewebappname')]",
+            "key2": "value2",
+            "siteConfig": {
+              "connectionStrings": [
+                {
+                  "name": "defaultConnection",
+                  "connectionString": "Server=empwebsql-dev.database.windows.net;Database=empdb-dev;User Id=vinod;Password=SaiRam@1983;",
+                  "type": "SQLServer"
+                }
+              ]
+            }
+          }
+        }
+      ]
     }
-    
     ],
   "outputs": {}
 }

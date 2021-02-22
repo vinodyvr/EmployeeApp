@@ -107,7 +107,24 @@
       "properties": {
         "name": "[parameters('employeewebappname')]",
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('employeewebappname'))]"
-      }
+      },
+      "resources": [
+        {
+          "name": "appsettings",
+          "type": "config",
+          "apiVersion": "2015-08-01",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('employeewebappname'))]"
+          ],
+          "tags": {
+            "displayName": "EmployeeAppSettings"
+          },
+          "properties": {
+            "key1": "[parameters('employeewebappname')]",
+            "key2": "value2"
+          }
+        }
+      ]
     },
     {
       "name": "[parameters('employeesqlservername')]",

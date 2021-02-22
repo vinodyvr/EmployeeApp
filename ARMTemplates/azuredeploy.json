@@ -129,7 +129,8 @@
               "connectionStrings": [
                 {
                   "name": "defaultConnection",
-                  "connectionString": "[parameters('employeeconnectionstring')]"
+                  "connectionString": "[parameters('employeeconnectionstring')]",
+                  "type": 2
                 }
               ]
             }

@@ -173,7 +173,7 @@
                 {
                   "name": "defaultConnection",
                   "connectionString": "[parameters('employeewebappname')]",
-                  "type": "SQLServer"
+                  "type": 2
                 }
               ]
             }

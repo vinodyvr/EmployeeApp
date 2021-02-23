@@ -167,8 +167,16 @@
             "displayName": "EmployeeAppSettings"
           },
           "properties": {
-            "key1": "[parameters('employeewebappname')]",
-            "key2": "value2"            
+            "AppName": "[parameters('employeewebappname')]",
+            "siteConfig": {
+              "connectionStrings": [
+                {
+                  "name": "defaultConnection",
+                  "connectionString": "[parameters('employeewebappname')]",
+                  "type": "SQLServer"
+                }
+              ]
+            }
           }
         }
       ]

@@ -167,16 +167,17 @@
             "displayName": "EmployeeAppSettings"
           },
           "properties": {
-            "connectionStrings": [
-              {
-                "ConnectionString": "test",
-                "Name": "DefaultConnection",
-                "Type": 2
-              }
-            ],
             "key1": "[parameters('employeewebappname')]",
             "key2": "value2"
-          }
+          },
+          "connectionStrings": [
+            {
+              "name": "defaultConnection",
+              "value": "Server=empwebsql-dev.database.windows.net;Database=empdb-dev;User Id=vinod;Password=SaiRam@1983;",
+              "type": "SQLServer",
+              "slotSetting": false
+            }
+          ]
         }
       ]
     }

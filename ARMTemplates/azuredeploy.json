@@ -169,7 +169,7 @@
           "properties": {
             "connectionStrings": [
               {
-                "ConnectionString": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', parameters('employeesqlservername'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', parameters('employeesqldbName'), ';User Id=', parameters('employeesqlserverAdminLogin'), '@', parameters('employeesqlservername'), ';Password=', parameters('employeesqlserverAdminLoginPassword'), ';')]",
+                "ConnectionString": "test",
                 "Name": "DefaultConnection",
                 "Type": 2
               }

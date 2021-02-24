@@ -167,7 +167,15 @@
             "displayName": "EmployeeAppSettings"
           },
           "properties": {
-            "AppName": "[parameters('employeewebappname')]"            
+            "connectionStrings": [
+              {
+                "ConnectionString": "[concat('Data Source=tcp:', reference(concat('Microsoft.Sql/servers/', parameters('employeesqlservername'))).fullyQualifiedDomainName, ',1433;Initial Catalog=', parameters('employeesqldbName'), ';User Id=', parameters('employeesqlserverAdminLogin'), '@', parameters('employeesqlservername'), ';Password=', parameters('employeesqlserverAdminLoginPassword'), ';')]",
+                "Name": "DefaultConnection",
+                "Type": 2
+              }
+            ],
+            "key1": "[parameters('employeewebappname')]",
+            "key2": "value2"
           }
         }
       ]

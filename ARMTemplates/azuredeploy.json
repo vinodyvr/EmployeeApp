@@ -168,18 +168,9 @@
           },
           "properties": {
             "key1": "[parameters('employeewebappname')]",
-            "key2": "value2",
-            "siteConfig": {
-              "connectionStrings": [
-                {
-                  "name": "ConnString1",
-                  "connectionString": "Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;",
-                  "type": 2 /* SQL Database */
-                }
-              ]
-            }
+            "key2": "value2"
           }
-          }
+        }
       ]
     }
     ],

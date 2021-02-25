@@ -169,15 +169,20 @@
           "properties": {
             "key1": "[parameters('employeewebappname')]",
             "key2": "value2",
-            "defaultConnection": "[concat('Data Source=',reference(parameters('employeesqlservername')).fullyQualifiedDomainName,';Initial Catalog=',parameters('employeesqldbName'),';User ID=',parameters('employeesqlserverAdminLogin'),';Password=',parameters('employeesqlserverAdminLoginPassword'))]",
-            "siteConfig": {
-              "connectionStrings": [
-                {
-                  "name": "defaultConnection1",
-                  "connectionString": "",
-                  "type": "SQLAzure"
-                }
-              ]
+            "defaultConnection": "[concat('Data Source=',reference(parameters('employeesqlservername')).fullyQualifiedDomainName,';Initial Catalog=',parameters('employeesqldbName'),';User ID=',parameters('employeesqlserverAdminLogin'),';Password=',parameters('employeesqlserverAdminLoginPassword'))]"
+          }
+        },
+        {
+          "apiVersion": "2015-08-01",
+          "name": "connectionstrings",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/sites', parameters('employeewebappname'))]"
+          ],
+          "properties": {
+            "MyDbConnectionString": {
+              "value": "[concat('Data Source=',reference(parameters('employeesqlservername')).fullyQualifiedDomainName,';Initial Catalog=',parameters('employeesqldbName'),';User ID=',parameters('employeesqlserverAdminLogin'),';Password=',parameters('employeesqlserverAdminLoginPassword'))]",
+              "type": "SQLServer"
             }
           }
         }

@@ -35,5 +35,10 @@ stages:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)'
             ArtifactName: 'drop'
             publishLocation: 'Container'
-  
+        - task: CopyFiles@2
+          inputs:
+            SourceFolder: 'ARMTemplates'
+            Contents: 'azuredeploy*.json'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
+          
 

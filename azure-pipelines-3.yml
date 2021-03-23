@@ -6,7 +6,7 @@
 trigger:
 - main
 stages:
-  - stage: Build & Publish
+  - stage: Build - Publish
     jobs:
       - job: 
         pool:

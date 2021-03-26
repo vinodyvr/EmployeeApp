@@ -37,8 +37,8 @@ stages:
             publishLocation: 'Container'
         - task: CopyFiles@2
           inputs:
-            SourceFolder: 'ARMTemplates'
+            SourceFolder: '$(Build.SourcesDirectory)'
             Contents: 'azuredeploy*.json'
-            TargetFolder: '$(System.ArtifactsDirectory)'
+            TargetFolder: ' $(build.artifactstagingdirectory)'
           
 

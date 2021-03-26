@@ -39,6 +39,6 @@ stages:
           inputs:
             SourceFolder: 'ARMTemplates'
             Contents: 'azuredeploy*.json'
-            TargetFolder: '$(Build.ArtifactStagingDirectory)'
+            TargetFolder: '$(System.ArtifactsDirectory)'
           
 

@@ -75,8 +75,8 @@ stages:
               resourceGroupName: '$(arm_employeewebappname)'
               location: 'Canada Central'
               templateLocation: 'Linked artifact'
-              csmFile: '$(Pipeline.Workspace)/drop/azuredeploy.json'
-              csmParametersFile: '$(Pipeline.Workspace)/drop/azuredeploy.parameters.json'
+              csmFile: '$(System.DefaultWorkingDirectory)/*/azuredeploy.json'
+              csmParametersFile: '$(System.DefaultWorkingDirectory)/*/azuredeploy.parameters.json'
               deploymentMode: 'Incremental'
           
 

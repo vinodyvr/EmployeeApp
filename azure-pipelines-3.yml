@@ -46,12 +46,12 @@ stages:
             ArtifactName: 'drop'
             publishLocation: 'Container'
   
-  - stage: Dev Deployment
+  - stage: Dev_Deployment
     dependsOn: Build_Publish
     jobs:
       - job: Dev_Deployment
         variables: 
-        - group: dev_emp
+        - group: devemp
         
         steps:
           - task: replacetokens@3

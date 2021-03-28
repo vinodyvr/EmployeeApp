@@ -53,7 +53,7 @@ stages:
         variables: 
         - group: devemp
         
-        steps:
+        steps:          
           - task: replacetokens@3
             inputs:
               targetFiles: 'azuredeploy.parameters.json'
@@ -75,8 +75,8 @@ stages:
               resourceGroupName: '$(arm_employeewebappname)'
               location: 'Canada Central'
               templateLocation: 'Linked artifact'
-              csmFile: '$(System.DefaultWorkingDirectory)/*/drop/azuredeploy.json'
-              csmParametersFile: '$(System.DefaultWorkingDirectory)/*/drop/azuredeploy.parameters.json'
+              csmFile: '$(Pipeline.Workspace)/drop/azuredeploy.json'
+              csmParametersFile: '$(Pipeline.Workspace)/drop/azuredeploy.parameters.json'
               deploymentMode: 'Incremental'
           
 

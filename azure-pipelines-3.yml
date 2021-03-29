@@ -62,11 +62,11 @@ stages:
               buildType: 'current'
               downloadType: 'single'
               artifactName: 'drop'
-              downloadPath: '$(Pipeline.Workspace)'
+              downloadPath: '$(System.ArtifactsDirectory)'
           - task: replacetokens@3
             displayName: 'Replace tokens in azuredeploy.parameters.json'
             inputs:
-              rootDirectory: '$(Pipeline.Workspace)/*/drop'
+              rootDirectory: '$(System.ArtifactsDirectory)/*/drop'
               targetFiles: azuredeploy.parameters.json
               tokenPrefix: '#'
               tokenSuffix: '#'
@@ -80,8 +80,8 @@ stages:
               resourceGroupName: '$(arm_employeewebappname)'
               location: 'Canada Central'
               templateLocation: 'Linked artifact'
-              csmFile: '$(Pipeline.Workspace)/*/azuredeploy.json'
-              csmParametersFile: '$(Pipeline.Workspace)/*/azuredeploy.parameters.json'
+              csmFile: '$(System.ArtifactsDirectory)/*/azuredeploy.json'
+              csmParametersFile: '$(System.ArtifactsDirectory)/*/azuredeploy.parameters.json'
               deploymentMode: 'Incremental'
           
 

@@ -65,7 +65,7 @@ stages:
               downloadPath: '$(Pipeline.Workspace)'
           - task: replacetokens@3
             inputs:
-              rootDirectory: '$(Pipeline.Workspace)'
+              rootDirectory: '$(Pipeline.Workspace)/*/drop'
               targetFiles: 'azuredeploy.parameters.json'
               encoding: 'auto'
               writeBOM: true

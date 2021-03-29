@@ -70,19 +70,7 @@ stages:
               targetFiles: azuredeploy.parameters.json
               tokenPrefix: '#'
               tokenSuffix: '#'
-          - task: replacetokens@3
-            inputs:
-              rootDirectory: '$(Pipeline.Workspace)/*/drop'
-              targetFiles: 'azuredeploy.parameters.json'
-              encoding: 'auto'
-              writeBOM: true
-              actionOnMissing: 'warn'
-              keepToken: false
-              tokenPrefix: '#'
-              tokenSuffix: '#'
-              useLegacyPattern: false
-              enableTransforms: false
-              enableTelemetry: true
+          
           - task: AzureResourceManagerTemplateDeployment@3
             inputs:
               deploymentScope: 'Resource Group'

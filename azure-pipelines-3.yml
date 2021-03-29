@@ -50,6 +50,9 @@ stages:
     dependsOn: Build_Publish
     jobs:
       - job: Dev_Deployment
+        pool:
+          vmImage: 'windows-latest'
+
         variables: 
         - group: devemp
         
@@ -59,10 +62,10 @@ stages:
               buildType: 'current'
               downloadType: 'single'
               artifactName: 'drop'
-              downloadPath: '$(System.ArtifactsDirectory)'
+              downloadPath: '$(Pipeline.Workspace)'
           - task: replacetokens@3
             inputs:
-              rootDirectory: '$(System.ArtifactsDirectory)'
+              rootDirectory: '$(Pipeline.Workspace)'
               targetFiles: 'azuredeploy.parameters.json'
               encoding: 'auto'
               writeBOM: true
@@ -82,8 +85,8 @@ stages:
               resourceGroupName: '$(arm_employeewebappname)'
               location: 'Canada Central'
               templateLocation: 'Linked artifact'
-              csmFile: '$(System.ArtifactsDirectory)/*/azuredeploy.json'
-              csmParametersFile: '$(System.ArtifactsDirectory)/*/azuredeploy.parameters.json'
+              csmFile: '$(Pipeline.Workspace)/*/azuredeploy.json'
+              csmParametersFile: '$(Pipeline.Workspace)/*/azuredeploy.parameters.json'
               deploymentMode: 'Incremental'
           
 

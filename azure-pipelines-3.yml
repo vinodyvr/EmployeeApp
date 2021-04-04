@@ -8,7 +8,7 @@ trigger:
 stages:
   
   - stage: Dev_Deployment
-    dependsOn: Build_Publish
+    dependsOn: 
     jobs:
       - job: Dev_Deployment
         pool:

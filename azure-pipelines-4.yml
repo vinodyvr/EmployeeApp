@@ -19,6 +19,7 @@ stages:
           targetPath: '$(Pipeline.Workspace)'
 
       - task: replacetokens@3
+        displayName: 'Replace tokens in azuredeploy.parameters.json'
         inputs:
           rootDirectory: '$(Pipeline.Workspace)/drop'
           targetFiles: 'azuredeploy.parameters.json'

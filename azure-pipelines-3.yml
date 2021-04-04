@@ -62,14 +62,21 @@ stages:
               buildType: 'current'
               downloadType: 'single'
               artifactName: 'drop'
-              downloadPath: '$(System.ArtifactsDirectory)'
+              downloadPath: '$(Pipeline.Workspace)'
           - task: replacetokens@3
             displayName: 'Replace tokens in azuredeploy.parameters.json'
             inputs:
-              rootDirectory: '$(System.ArtifactsDirectory)/*/drop'
-              targetFiles: azuredeploy.parameters.json
+              rootDirectory: '$(Pipeline.Workspace)/drop'
+              targetFiles: 'azuredeploy.parameters.json'
+              encoding: 'auto'
+              writeBOM: true
+              actionOnMissing: 'warn'
+              keepToken: false
               tokenPrefix: '#'
               tokenSuffix: '#'
+              useLegacyPattern: false
+              enableTransforms: false
+              enableTelemetry: false
           
           - task: AzureResourceManagerTemplateDeployment@3
             inputs:

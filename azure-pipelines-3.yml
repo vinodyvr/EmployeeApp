@@ -90,5 +90,13 @@ stages:
               csmFile: '$(Pipeline.Workspace)/drop/azuredeploy.json'
               csmParametersFile: '$(Pipeline.Workspace)/drop/azuredeploy.parameters.json'
               deploymentMode: 'Incremental'
+              
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+              appType: 'webApp'
+              WebAppName: '$(arm_employeewebappname)'
+              packageForLinux: '$(Pipeline.Workspace)/drop/*.zip'
           
 

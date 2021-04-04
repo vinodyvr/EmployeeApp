@@ -110,3 +110,129 @@ stages:
               SqlFile: '$(Pipeline.Workspace)/drop/EmployeeDB.sql'
               IpDetectionMethod: 'AutoDetect'
 
+  - stage: QA_Deployment
+    dependsOn: Dev_Deployment
+    jobs:
+      - job: QA_Deployment
+        pool:
+          vmImage: 'windows-latest'
+
+        variables: 
+        - group: qaemp
+        
+        steps: 
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(Pipeline.Workspace)'
+          - task: replacetokens@3
+            displayName: 'Replace tokens in azuredeploy.parameters.json'
+            inputs:
+              rootDirectory: '$(Pipeline.Workspace)/drop'
+              targetFiles: 'azuredeploy.parameters.json'
+              encoding: 'auto'
+              writeBOM: true
+              actionOnMissing: 'warn'
+              keepToken: false
+              tokenPrefix: '#'
+              tokenSuffix: '#'
+              useLegacyPattern: false
+              enableTransforms: false
+              enableTelemetry: false
+          
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              deploymentScope: 'Resource Group'
+              azureResourceManagerConnection: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+              subscriptionId: '8a637732-23bb-4eac-8053-74de19434aab'
+              action: 'Create Or Update Resource Group'
+              resourceGroupName: '$(arm_employeewebappname)'
+              location: 'Canada Central'
+              templateLocation: 'Linked artifact'
+              csmFile: '$(Pipeline.Workspace)/drop/azuredeploy.json'
+              csmParametersFile: '$(Pipeline.Workspace)/drop/azuredeploy.parameters.json'
+              deploymentMode: 'Incremental'
+              
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+              appType: 'webApp'
+              WebAppName: '$(arm_employeewebappname)'
+              packageForLinux: '$(Pipeline.Workspace)/drop/*.zip'
+          - task: SqlAzureDacpacDeployment@1
+            inputs:
+              azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+              AuthenticationType: 'server'
+              ServerName: '$(arm_employeesqlservername).database.windows.net'
+              DatabaseName: '$(arm_employeesqldbName)'
+              SqlUsername: '$(arm_employeesqlserverAdminLogin)'
+              SqlPassword: '$(arm_employeesqlserverAdminLoginPassword)'
+              deployType: 'SqlTask'
+              SqlFile: '$(Pipeline.Workspace)/drop/EmployeeDB.sql'
+              IpDetectionMethod: 'AutoDetect'
+  - stage: Prod_Deployment
+    dependsOn: QA_Deployment
+    jobs:
+      - job: Prod_Deployment
+        pool:
+          vmImage: 'windows-latest'
+
+        variables: 
+        - group: prodemp
+        
+        steps: 
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(Pipeline.Workspace)'
+          - task: replacetokens@3
+            displayName: 'Replace tokens in azuredeploy.parameters.json'
+            inputs:
+              rootDirectory: '$(Pipeline.Workspace)/drop'
+              targetFiles: 'azuredeploy.parameters.json'
+              encoding: 'auto'
+              writeBOM: true
+              actionOnMissing: 'warn'
+              keepToken: false
+              tokenPrefix: '#'
+              tokenSuffix: '#'
+              useLegacyPattern: false
+              enableTransforms: false
+              enableTelemetry: false
+          
+          - task: AzureResourceManagerTemplateDeployment@3
+            inputs:
+              deploymentScope: 'Resource Group'
+              azureResourceManagerConnection: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+              subscriptionId: '8a637732-23bb-4eac-8053-74de19434aab'
+              action: 'Create Or Update Resource Group'
+              resourceGroupName: '$(arm_employeewebappname)'
+              location: 'Canada Central'
+              templateLocation: 'Linked artifact'
+              csmFile: '$(Pipeline.Workspace)/drop/azuredeploy.json'
+              csmParametersFile: '$(Pipeline.Workspace)/drop/azuredeploy.parameters.json'
+              deploymentMode: 'Incremental'
+              
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+              appType: 'webApp'
+              WebAppName: '$(arm_employeewebappname)'
+              packageForLinux: '$(Pipeline.Workspace)/drop/*.zip'
+          - task: SqlAzureDacpacDeployment@1
+            inputs:
+              azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+              AuthenticationType: 'server'
+              ServerName: '$(arm_employeesqlservername).database.windows.net'
+              DatabaseName: '$(arm_employeesqldbName)'
+              SqlUsername: '$(arm_employeesqlserverAdminLogin)'
+              SqlPassword: '$(arm_employeesqlserverAdminLoginPassword)'
+              deployType: 'SqlTask'
+              SqlFile: '$(Pipeline.Workspace)/drop/EmployeeDB.sql'
+              IpDetectionMethod: 'AutoDetect'

@@ -98,5 +98,15 @@ stages:
               appType: 'webApp'
               WebAppName: '$(arm_employeewebappname)'
               packageForLinux: '$(Pipeline.Workspace)/drop/*.zip'
-          
+          - task: SqlAzureDacpacDeployment@1
+            inputs:
+              azureSubscription: 'Free Trial(8a637732-23bb-4eac-8053-74de19434aab)'
+              AuthenticationType: 'server'
+              ServerName: '$(arm_employeesqlservername).database.windows.net'
+              DatabaseName: '$(arm_employeesqldbName)'
+              SqlUsername: '$(arm_employeesqlserverAdminLogin)'
+              SqlPassword: '$(arm_employeesqlserverAdminLoginPassword)'
+              deployType: 'SqlTask'
+              SqlFile: '$(Pipeline.Workspace)/drop/EmployeeDB.sql'
+              IpDetectionMethod: 'AutoDetect'
 
